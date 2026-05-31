@@ -1,0 +1,51 @@
+package anal;
+import java_cup.runtime.*;
+
+parser code{:
+    public String errsin = "";
+    public void syntax_error(Symbol x){
+        errsin += "\nError de Sintaxis en la posicionM: " + (x.left+1) + " , " + (x.right+1);
+        throw new UnsupportedOperationException(errsin);
+    }
+:};
+
+terminal num,id,pi,pd,op_log,op_rel,op_ari,asig,puntocoma,tipo,cadena,coma,leer,escribir;
+terminal programa,finprograma,mientras,hacer,finmientras,si,entonces,sino,finsi,para,hasta,paso,finpara;
+terminal segun,caso,deotromodo,finsegun,dospuntos;
+
+non terminal S,E,T,EL,EA,I,IS,LV,L,CASOS,CASO;
+
+start with S;
+
+S::= programa id IS finprograma;
+S::= programa IS finprograma;
+LV::= id;
+LV::= id coma LV;
+L::= id | cadena;
+L::= id coma L;
+L::= cadena coma L;
+I::= escribir L puntocoma;
+I::= tipo LV puntocoma;
+I::= leer LV puntocoma;
+I::= para id asig num hasta id paso num IS finpara;
+I::= para id asig num hasta id IS finpara;
+I::= si pi EL pd entonces IS finsi;
+I::= si pi EL pd entonces IS sino IS finsi;
+I::= mientras pi EL pd hacer IS finmientras;
+I::= id asig EL puntocoma;
+I::= id asig cadena puntocoma;
+I ::= segun id hacer CASOS finsegun;
+CASOS ::= CASO;
+CASOS ::= CASO CASOS;
+CASO ::= caso num dospuntos IS deotromodo dospuntos IS;
+CASO ::= caso num dospuntos IS;
+IS::= I;
+IS::= I IS;
+EL::= EL op_log EA;
+EL::= EA;
+EA::= E op_rel E;
+EA::= E;
+E::= E op_ari T;
+E::= T;
+T::= num | id;
+T::= pi EL pd;
