@@ -2,12 +2,7 @@ Cómo ejecutar
 Ejecuta en modo interactivo:
 python -m punto1.main
 Luego escribe expresiones y salir para terminar.
-Punto 1 (recursivo descendente
-
-
-Ejecuta en modo línea de comandos:
-
-Ejecuta en modo interactivo:
+Punto 1 (recursivo descendente)
 
 Casos válidos para probar
 Punto 1
